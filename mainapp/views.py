@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def main(request):
-    return render(request, 'mainapp/index.html')
+    return render(request, 'mainapp/index_test_templates.html')
 
 
 def product_info(request):
