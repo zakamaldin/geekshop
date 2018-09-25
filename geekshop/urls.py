@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 import mainapp.views as mainapp
 urlpatterns = [
-    path('', mainapp.main),
+    path('', mainapp.main, name='main'),
     path('product_info/', mainapp.product_info),
     path('products/', mainapp.products),
     path('contacts/', mainapp.contacts),
