@@ -1,190 +1,88 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}
     <title>ТвойБорд</title>
 {% endblock %}
 {% block container %}
     <div class="container">
-        <div class="slider padding-site">
+        {% include "includes/inc_slider.html" with menu=True slider=slider1 %}
 
-            {% include "includes/inc_menu.html" %}
-
-            <div class="slider-text">
-                <h3>TRENDING</h3>
-                <h2>Fishet Chair</h2>
-                <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                <a href="/product_info/" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
-            </div>
-            <div class="paggination">
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle active-circle"></a>
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle"></a>
-            </div>
-        </div>
         <div class="content padding-site">
             <ul class="sort">
                 <li><a href="#" class="active-sort">Featured</a></li>
                 <li><a href="#">New</a></li>
             </ul>
-            <a href="/products/" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
+            <a href="{% url 'products' %}" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
             <div class="shop-case">
+
+                {% for i in content.img_src %}
                 <div class="item">
-                    <img class="product-image" src="/static/img/products/product-1.jpg" alt="product image">
+                    <img class="product-image" src="/static/img/products/{{ i }}" alt="product image">
                     <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
+                        <a href="{% url 'product_info' %}" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
+                        <h3>{{ content.h3 }}</h3>
+                        <p>{{ content.p }}</p>
                     </div>
                 </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/products/product-2.jpg" alt="product image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/products/product-3.jpg" alt="product image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/products/product-4.jpg" alt="product image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
         <div class="promo">
             <div class="promo-product promo1">
                 <h3>exclusive</h3>
-                <h2>Fishet Chair</h2>
+                <h2>Fishnet Chair</h2>
                 <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                <a href="/product_info/" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
+                <a href="{% url 'product_info' %}" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
             </div>
             <div class="promo-product promo2">
                 <h3>exclusive</h3>
-                <h2>Fishet Chair</h2>
+                <h2>Fishnet Chair</h2>
                 <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                <a href="/product_info/" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
+                <a href="{% url 'product_info' %}" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
             </div>
         </div>
         <div class="trends padding-site">
             <div class="shop-case">
                 <h2>Trending Products</h2>
-                <a href="/products/" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
+                <a href="{% url 'products' %}" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
+
+                {% for i in trends.img_src %}
                 <div class="item">
-                    <img class="product-image" src="/static/img/trends/trend-1.jpg" alt="product-image">
+                    <img class="product-image" src="/static/img/trends/{{ i }}" alt="product-image">
                     <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h2>Fishet Chair</h2>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
+                        <a href="{% url 'product_info' %}" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
+                        <h2>{{trends.h2}}</h2>
+                        <p>{{ trends.p }}</p>
                     </div>
                 </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/trends/trend-2.jpg" alt="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h2>Fishet Chair</h2>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/trends/trend-3.jpg" alt="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h2>Fishet Chair</h2>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/trends/trend-4.jpg" alt="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h2>Fishet Chair</h2>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/trends/trend-5.jpg" alt="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h2>Fishet Chair</h2>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="/static/img/trends/trend-6.jpg" alt="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h2>Fishet Chair</h2>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
-        <div class="slider slider2 padding-site">
-            <div class="slider-text">
-                <h3>HOT DEAL</h3>
-                <h2>Fishet Chair</h2>
-                <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                <a href="/product_info/" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
-            </div>
-            <div class="paggination">
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle active-circle"></a>
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle"></a>
-            </div>
-        </div>
+
+        {% include "includes/inc_slider.html" with slider_num="slider2" slider=slider2 %}
+
         <div class="exclusive padding-site">
             <div class="promo-product">
                 <h3>exclusive</h3>
-                <h2>Fishet Chair</h2>
+                <h2>Fishnet Chair</h2>
                 <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p>
-                <a href="/product_info/" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
+                <a href="{% url 'product_info' %}" class="order-link">ORDER US<img src="/static/img/arrow.svg" alt="arrow"> </a>
             </div>
             <div class="shop-case">
-                <div class="item"><img src="/static/img/exclusive/exclusive-1.jpg" alt="product-image" class="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
-                <div class="item"><img src="/static/img/exclusive/exclusive-2.jpg" alt="product-image" class="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
-                <div class="item"><img src="/static/img/exclusive/exclusive-3.jpg" alt="product-image" class="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
-                <div class="item"><img src="/static/img/exclusive/exclusive-4.jpg" alt="product-image" class="product-image">
-                    <div class="middle">
-                        <a href="/product_info/" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
-                        <h3>Fishnet Chair</h3>
-                        <p>Seat and back with upholstery made of cold cure foam</p>
-                    </div>
-                </div>
-            </div>
 
+                {% for i in exclusive.img_src %}
+                    <div class="item"><img src="/static/img/exclusive/{{ i }}" alt="product-image" class="product-image">
+                        <div class="middle">
+                            <a href="{% url 'product_info' %}" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
+                            <h3>{{ exclusive.h3 }}</h3>
+                            <p>{{ exclusive.p }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
         </div>
         <div class="app padding-site">
             <div class="slider-text">
