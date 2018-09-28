@@ -23,6 +23,14 @@ main_filling = {
         'h2': 'Fishnet Chair',
         'p': 'Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black'},
 }
+products_filling = {
+
+    'trends': {
+        'img_src': ['trend-1.jpg', 'trend-2.jpg', 'trend-3.jpg', 'trend-4.jpg', 'trend-5.jpg', 'trend-6.jpg'],
+        'h2': 'Fishnet Chair',
+        'p': 'Seat and back with upholstery made of cold cure foam. Steel frame,'
+             ' available in matt powder-coated black'},
+}
 
 
 def main(request):
@@ -34,7 +42,7 @@ def product_info(request):
 
 
 def products(request):
-    return render(request, 'mainapp/products.html')
+    return render(request, 'mainapp/products_test_templates.html', products_filling)
 
 
 def contacts(request):
