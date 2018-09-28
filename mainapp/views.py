@@ -60,16 +60,16 @@ contacts_filling = {
 }
 
 def main(request):
-    return render(request, 'mainapp/index_test_templates.html', main_filling)
+    return render(request, 'mainapp/index.html', main_filling)
 
 
 def product_info(request):
-    return render(request, 'mainapp/product_info_test_templates.html', product_info_filling)
+    return render(request, 'mainapp/product_info.html', product_info_filling)
 
 
 def products(request):
-    return render(request, 'mainapp/products_test_templates.html', products_filling)
+    return render(request, 'mainapp/products.html', products_filling)
 
 
 def contacts(request):
-    return render(request, 'mainapp/contacts_test_templates.html', {'contacts_filling': contacts_filling})
+    return render(request, 'mainapp/contacts.html', {'contacts_filling': contacts_filling})
