@@ -31,14 +31,30 @@ products_filling = {
         'p': 'Seat and back with upholstery made of cold cure foam. Steel frame,'
              ' available in matt powder-coated black'},
 }
+product_info_filling = {
 
+    'trends': {
+        'img_src': ['trend-1.jpg', 'trend-2.jpg', 'trend-3.jpg'],
+        'h2': 'Fishnet Chair',
+        'p': 'Seat and back with upholstery made of cold cure foam. Steel frame,'
+             ' available in matt powder-coated black'},
+}
+
+contacts_filling = {
+
+    'trends': {
+        'img_src': ['trend-1.jpg', 'trend-2.jpg', 'trend-3.jpg', 'trend-4.jpg', 'trend-5.jpg', 'trend-6.jpg'],
+        'h2': 'Fishnet Chair',
+        'p': 'Seat and back with upholstery made of cold cure foam. Steel frame,'
+             ' available in matt powder-coated black'},
+}
 
 def main(request):
     return render(request, 'mainapp/index_test_templates.html', main_filling)
 
 
 def product_info(request):
-    return render(request, 'mainapp/product.html')
+    return render(request, 'mainapp/product_info_test_templates.html', product_info_filling)
 
 
 def products(request):
@@ -46,4 +62,4 @@ def products(request):
 
 
 def contacts(request):
-    return render(request, 'mainapp/contacts.html')
+    return render(request, 'mainapp/contacts.html', contacts_filling)
