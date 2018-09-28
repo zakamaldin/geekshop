@@ -42,11 +42,21 @@ product_info_filling = {
 
 contacts_filling = {
 
-    'trends': {
-        'img_src': ['trend-1.jpg', 'trend-2.jpg', 'trend-3.jpg', 'trend-4.jpg', 'trend-5.jpg', 'trend-6.jpg'],
-        'h2': 'Fishnet Chair',
-        'p': 'Seat and back with upholstery made of cold cure foam. Steel frame,'
-             ' available in matt powder-coated black'},
+    'info1': {
+        'city': '123',
+        'phone': '1900 - 1234 -5678',
+        'email': 'info@interior.com',
+        'address': '12 W 1st St, 90001 Los Angeles, California'},
+    'info2': {
+        'city': 'California',
+        'phone': '1900 - 1234 -5678',
+        'email': 'info@interior.com',
+        'address': '12 W 1st St, 90001 Los Angeles, California'},
+    'info3': {
+        'city': 'California',
+        'phone': '1900 - 1234 -5678',
+        'email': 'info@interior.com',
+        'address': '12 W 1st St, 90001 Los Angeles, California'},
 }
 
 def main(request):
@@ -62,4 +72,4 @@ def products(request):
 
 
 def contacts(request):
-    return render(request, 'mainapp/contacts.html', contacts_filling)
+    return render(request, 'mainapp/contacts_test_templates.html', {'contacts_filling': contacts_filling})

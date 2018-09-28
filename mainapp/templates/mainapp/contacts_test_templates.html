@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>Our Products</title>
+{% endblock %}
+{% block container %}
+    <div class="contacts-page container">
+        <div class="contacts-header padding-site">
+            {% include "includes/inc_menu.html" %}
+            <div class="slider-text">
+                <h2>Contact Us</h2>
+            </div>
+        </div>
+        <div class="content padding-site">
+            <div class="shop-case">
+                {% for k, v in contacts_filling.items %}
+                <div class="item">
+                    <i class="fas fa-map-marker-alt map-icon"></i>
+                    <h2>{{ v.city }}</h2>
+                    <div class="text-info">
+                        <h4>Phone:</h4>
+                        <h4 class="text">{{ v.phone }}</h4>
+                        <h4>Email:</h4>
+                        <h4 class="text">{{ v.email }}</h4>
+                        <h4>Address:</h4>
+                        <p class="address text">{{ v.address }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        {% include "includes/inc_footer.html" %}
+    </div>
+{% endblock %}
