@@ -21,7 +21,7 @@ a {
 .slider {
     position: relative;
     height: 800px;
-    background-image: url(../img/slider.jpg)
+    background-image: url(/static/img/slider.jpg)
 }
 
 .padding-site {
@@ -73,7 +73,7 @@ a {
 }
 
 .menu .search-bar {
-    background-image: url('../img/search.svg');
+    background-image: url('/static/img/search.svg');
     width: 25px;
     height: 38px;
     border: 2px solid transparent;
@@ -356,11 +356,11 @@ a {
 }
 
 .promo1 {
-    background-image: url(../img/promo/promo-1.jpg);
+    background-image: url(/static/img/promo/promo-1.jpg);
 }
 
 .promo2 {
-    background-image: url(../img/promo/promo-2.jpg);
+    background-image: url(/static/img/promo/promo-2.jpg);
 }
 
 .promo-product {
@@ -440,7 +440,7 @@ a {
 
 
 .slider2 {
-    background-image: url(../img/slider-2.jpg)
+    background-image: url(/static/img/slider-2.jpg)
 }
 
 .slider2 h3 {
@@ -460,7 +460,7 @@ a {
 
 
 .exclusive .promo-product {
-    background-image: url(../img/promo/promo-3.jpg);
+    background-image: url(/static/img/promo/promo-3.jpg);
     background-repeat: no-repeat;
     width: 570px;
     height: 570px;
@@ -487,7 +487,7 @@ a {
 .app {
     height: 516px;
     position: relative;
-    background-image: url(../img/back.jpg)
+    background-image: url(/static/img/back.jpg)
 }
 
 .app .slider-text {
