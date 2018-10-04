@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from django.conf.urls.static import  static
+from django.conf.urls.static import static
+from mainapp import views as mainapp_views
 urlpatterns = [
-    path('', include('mainapp.urls')),
+    path('', mainapp_views.main, name='main'),
+    path('contacts/', mainapp_views.contacts, name='contacts'),
+    path('products/', include('mainapp.urls', namespace='products')),
+    path('product_info/', mainapp_views.product_info, name='product_info'),
+
     path('admin/', admin.site.urls),
 
 ]

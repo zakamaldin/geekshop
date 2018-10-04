@@ -12,7 +12,7 @@
                 <li><a href="#" class="active-sort">Featured</a></li>
                 <li><a href="#">New</a></li>
             </ul>
-            <a href="{% url 'products' %}" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
+            <a href="{% url 'products:product_index' %}" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
             <div class="shop-case">
 
                 {% for i in content.img_src %}
@@ -33,7 +33,7 @@
         <div class="trends padding-site">
             <div class="shop-case">
                 <h2>Trending Products</h2>
-                <a href="{% url 'products' %}" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
+                <a href="{% url 'products:product_index' %}" class="explore">explore all<img src="/static/img/arrow.svg" alt="arrow"></a>
 
                 {% for t in trends.img_src %}
                 <div class="item">

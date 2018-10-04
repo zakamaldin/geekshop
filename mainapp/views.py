@@ -22,7 +22,9 @@ def product_info(request):
     return render(request, 'mainapp/product_info.html', product_info_filling)
 
 
-def products(request):
+def products(request, category_id=None):
+    if category_id:
+        print('номер категории:', category_id)
     return render(request, 'mainapp/products.html', products_filling)
 
 
