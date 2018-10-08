@@ -1,0 +1,41 @@
+[
+	{
+		"model": "mainapp.customer",
+		"pk": 1,
+		"fields": {
+						"name": "aleksandr",
+						"age": "17",
+						"phone": "7(495)020-86-43"
+					}
+	},
+	
+	{
+		"model": "mainapp.customer",
+		"pk": 2,
+		"fields": {
+						"name": "evgeniy",
+						"age": "23",
+						"phone": "7(495)661-45-94"
+					}
+	},
+	
+		{
+		"model": "mainapp.customer",
+		"pk": 3,
+		"fields": {
+						"name": "mihail",
+						"age": "43",
+						"phone": "7(495)941-58-51"
+					}
+	},
+	
+	{
+		"model": "mainapp.customer",
+		"pk": 4,
+		"fields": {
+						"name": "alisa",
+						"age": "25",
+						"phone": "7(495)021-59-69"
+					}
+	}
+]
