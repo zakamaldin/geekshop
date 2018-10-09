@@ -2,7 +2,7 @@
   {
     "category": "others",
     "name": "ступка",
-    "image": "/static/img/trends/trend-5.jpg",
+    "image": "/products_images/trends/trend-5.jpg",
     "short_desc": "ступка каменная",
     "price":"1799",
     "quantity":"32"
@@ -10,7 +10,7 @@
   {
     "category": "lamps",
     "name": "светильник1",
-    "image": "/static/img/trends/trend-3.jpg",
+    "image": "/products_images/trend-3.jpg",
     "short_desc": "светильник настольный",
     "price":"3599",
     "quantity":"21"
@@ -18,7 +18,7 @@
   {
     "category": "lamps",
     "name": "светильник2",
-    "image": "/static/img/trends/trend-4.jpg",
+    "image": "/products_images/trends/trend-4.jpg",
     "short_desc": "светильник настенный",
     "price":"4699",
     "quantity":"7"
@@ -26,7 +26,7 @@
   {
     "category": "lamps",
     "name": "светильник3",
-    "image": "/static/img/trends/trend-1.jpg",
+    "image": "/products_images/trends/trend-1.jpg",
     "short_desc": "светильник потолочный",
     "price":"7999",
     "quantity":"13"
@@ -34,7 +34,7 @@
   {
     "category": "others",
     "name": "ваза",
-    "image": "/static/img/trends/trend-6.jpg",
+    "image": "/products_images/trends/trend-6.jpg",
     "short_desc": "ваза бежевая",
     "price":"3299",
     "quantity":"11"
@@ -42,7 +42,7 @@
   {
     "category": "chairs",
     "name": "кресло",
-    "image": "/static/img/trends/trend-2.jpg",
+    "image": "/products_images/trends/trend-2.jpg",
     "short_desc": "кресло белое",
     "price":"4599",
     "quantity":"47"
@@ -50,7 +50,7 @@
   {
     "category": "chairs",
     "name": "кресло",
-    "image": "/static/img/products/product-2.jpg",
+    "image": "/products_images/products/product-2.jpg",
     "short_desc": "кресло синее",
     "price":"2499",
     "quantity":"19"
@@ -58,7 +58,7 @@
   {
     "category": "chairs",
     "name": "кресло",
-    "image": "/static/img/products/product-4.jpg",
+    "image": "/products_images/products/product-4.jpg",
     "short_desc": "кресло красное",
     "price":"2799",
     "quantity":"23"
