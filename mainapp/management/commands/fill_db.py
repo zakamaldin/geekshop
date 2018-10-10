@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from mainapp.models import Product, ProductCategory
-#from django.contrib.auth.models import User
 from django.conf import settings
 
 

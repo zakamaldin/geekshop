@@ -14,8 +14,8 @@ def main(request):
     title = 'Lesson03'
     products = Product.objects.all()[:4]
     content = {'title': title, 'products': products}
-    #return render(request, 'mainapp/index.html', main_filling)
-    return render(request, 'mainapp/Lesson03.html', content)
+    return render(request, 'mainapp/index.html', main_filling)
+    #return render(request, 'mainapp/Lesson03.html', content)
 
 
 def product_info(request):
