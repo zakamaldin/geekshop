@@ -1,0 +1,25 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block container %}
+    <div class="log-user-page container">
+        <div class="log-user-header padding-site">
+            {% include "includes/inc_menu.html" %}
+            <div class="slider-text">
+                <h2>Logging In</h2>
+            </div>
+        </div>
+        <div class="content padding-site">
+            <div class="login">
+                <form class="form-horizontal" action="{% url 'auth:login' %}" method="post" >
+                    {% csrf_token %}
+                    {{ login_form.as_p }}
+                    <br>
+                    <input type="submit" class="form-control" value="LogIn">
+                </form>
+            </div>
+        </div>
+        {% include "includes/inc_footer.html" %}
+    </div>
+{% endblock %}
+
