@@ -110,8 +110,26 @@ a {
 .log-user-header .slider-text {
     bottom: 56px;
 }
-.content {
+
+
+.log-user-page .content {
     height: 300px;
+    position: relative;
+}
+.register-header {
+    position: relative;
+    height: 360px;
+    background-color: #f0f0f0;
+
+}
+
+.register-header .slider-text {
+    bottom: 56px;
+}
+
+
+.register-page .content {
+    height: 480px;
     position: relative;
 }
 
