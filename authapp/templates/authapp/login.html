@@ -6,7 +6,7 @@
         <div class="log-user-header padding-site">
             {% include "includes/inc_menu.html" %}
             <div class="slider-text">
-                <h2>Logging In</h2>
+                <h2>Sign In</h2>
             </div>
         </div>
         <div class="content padding-site">
@@ -15,7 +15,7 @@
                     {% csrf_token %}
                     {{ login_form.as_p }}
                     <br>
-                    <input type="submit" class="form-control" value="LogIn">
+                    <input type="submit" class="form-control order-link" value="Sign In">
                 </form>
             </div>
         </div>

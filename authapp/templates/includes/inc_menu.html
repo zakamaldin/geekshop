@@ -8,9 +8,9 @@
                     {% endif %}
                     <li>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'auth:logout' %}">LOG OUT</a>
+                        <a href="{% url 'auth:logout' %}">SIGN OUT</a>
                     {% else %}
-                        <a href="{% url 'auth:login' %}">LOG IN</a>
+                        <a href="{% url 'auth:login' %}">SIGN IN</a>
                     {% endif %}   
                     </li>
                     <li><a href="{% url 'contacts' %}">CONTACTS</a></li>
