@@ -23,6 +23,7 @@ urlpatterns = [
     path('contacts/', mainapp_views.contacts, name='contacts'),
     path('products/', include('mainapp.urls', namespace='products')),
     path('product_info/', mainapp_views.product_info, name='product_info'),
+    path('auth/', include('authapp.urls', namespace='auth')),
 
     path('admin/', admin.site.urls),
 
