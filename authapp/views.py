@@ -1,22 +1,27 @@
 from django.shortcuts import render, HttpResponseRedirect
-from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm
+from authapp.forms import (
+    ShopUserLoginForm,
+    ShopUserRegisterForm,
+    ShopUser
+    )
 from django.contrib import auth
 from django.urls import reverse
 
 
 def login(request):
     title = 'Enter'
+    template = 'authapp/user.html'
 
-    login_form = ShopUserLoginForm(data=request.POST)
-    if request.method == 'POST' and login_form.is_valid():
+    form = ShopUserLoginForm(data=request.POST)
+    if request.method == 'POST' and form.is_valid():
         usr = request.POST['username']
         pwd = request.POST['password']
         user = auth.authenticate(username=usr, password=pwd)
         if user and user.is_active:
             auth.login(request, user)
             return HttpResponseRedirect(reverse('main'))
-    content = {'title': title, 'login_form': login_form}
-    return render(request, 'authapp/login.html', content)
+    content = {'title': title, 'form': form, 'type': 'log-user', 'text': 'Sign In', 'button': title}
+    return render(request, template, content)
 
 
 def logout(request):
@@ -25,20 +30,35 @@ def logout(request):
 
 
 def edit(request):
-    return HttpResponseRedirect(reverse('main'))
+    title = request.user.first_name
+    template = 'authapp/user.html'
+    user = ShopUser.objects.get(username=request.user)
+    form = ShopUserRegisterForm(instance=user)
+    if request.method == 'POST' and 'edit'in request.POST:
+        form = ShopUserRegisterForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('main'))
+    if request.method == 'POST' and 'delete' in request.POST:
+        user.delete()
+        return HttpResponseRedirect(reverse('main'))
+    content = {'title': title, 'form': form, 'type': 'edit', 'text': title, 'button': 'Edit'}
+    return render(request, template, content)
 
 
 def register(request):
     title = 'Registration'
+    template = 'authapp/user.html'
     if request.method == 'POST':
-        register_form = ShopUserRegisterForm(request.POST, request.FILES)
-        if register_form.is_valid():
-            register_form.save()
+        form = ShopUserRegisterForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect(reverse('auth:login'))
     else:
-        register_form = ShopUserRegisterForm()
-    content = {'title': title, 'register_form': register_form}
-    return render(request, 'authapp/register.html', content)
+        form = ShopUserRegisterForm()
+    content = {'title': title, 'form': form, 'type': 'register', 'text': 'Log In', 'button': 'Log In'}
+    return render(request, template, content)
 
 
-# Create your views here.
+
+
