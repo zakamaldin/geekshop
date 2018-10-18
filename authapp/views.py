@@ -34,11 +34,11 @@ def edit(request):
     template = 'authapp/user.html'
     user = ShopUser.objects.get(username=request.user)
     form = ShopUserRegisterForm(instance=user)
-    if request.method == 'POST' and 'edit'in request.POST:
+    if request.method == 'POST' and 'edit' in request.POST:
         form = ShopUserRegisterForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('main'))
+            return HttpResponseRedirect(reverse('auth:login'))
     if request.method == 'POST' and 'delete' in request.POST:
         user.delete()
         return HttpResponseRedirect(reverse('main'))
