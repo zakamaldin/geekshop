@@ -22,10 +22,3 @@ class Product(models.Model):
         return "{} ({})".format(self.name, self.category.name)
 
 
-class Customer(models.Model):
-    name = models.CharField(max_length=64)
-    age = models.IntegerField()
-    phone = models.CharField(max_length=16)
-
-    def __str__(self):
-        return "name:{}, age:{}, phone:{}".format(self.name, self.age, self.phone)
