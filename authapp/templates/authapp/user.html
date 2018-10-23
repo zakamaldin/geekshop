@@ -1,0 +1,37 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block container %}
+    <div class="{{ type }}-page container">
+        <div class="user-header padding-site">
+            {% include "includes/inc_menu.html" %}
+            <div class="slider-text">
+                <h2>{{ text }}</h2>
+            </div>
+        </div>
+        <div class="content padding-site">
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form  %}
+                <div class="form-field">
+                    <label for="{{ field.name }}" class="form-field-label">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <br>
+                <div class="buttons">
+                {% if type != 'edit' %}
+                <input type="submit" class="form-control order-link" value="{{ button }}">
+                {% else %}
+                    <input type="submit" name="edit" class="form-control order-link" value="{{ button }}">
+                    <input type="submit" name="delete" class="form-control order-link delete" value="Delete">
+                {% endif %}
+                </div>
+            </form>
+        </div>
+        {% include "includes/inc_footer.html" %}
+    </div>
+{% endblock %}
+

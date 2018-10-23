@@ -100,44 +100,40 @@ a {
 }
 
 
-.log-user-header {
+.user-header {
     position: relative;
     height: 360px;
     background-color: #f0f0f0;
 
 }
 
-.log-user-header .slider-text {
+.user-header .slider-text {
     bottom: 56px;
 }
-
+.content{
+    position: relative;
+    height: 550px;
+}
 
 .log-user-page .content {
     height: 300px;
-    position: relative;
-}
-.register-header {
-    position: relative;
-    height: 360px;
-    background-color: #f0f0f0;
-
 }
 
-.register-header .slider-text {
-    bottom: 56px;
+.form-field-label{
+    line-height: 42px;
 }
-
-
-.register-page .content {
-    height: 480px;
-    position: relative;
-}
-
 .form-horizontal {
     display: block;
     text-align: left;
     padding-top: 72px;
     padding-left: 435px;
+    width: 400px;
+}
+.form-field{
+
+    display: flex;
+
+    justify-content: space-between;
 }
 .form-horizontal input{
     width: 200px;
@@ -147,13 +143,18 @@ a {
     outline: none;
 
 }
+
 .form-horizontal input[type="submit"]{
-    margin-left: 110px;
     width: 150px;
     height: 45px;
     border-radius: 22.5px;
     border:none;
 
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
 }
 .order-link {
     font-family: Montserrat;
@@ -178,13 +179,16 @@ a {
     box-shadow: 0px 0px 4.85px 0.15px rgba(33, 33, 33, 0.35);
     top: 2px;
 
-
 }
 
 
 .order-link:hover {
     background-color: #85aeb8;
     color: aliceblue;
+
+}
+.delete:hover {
+    background-color: #b86260;
 
 }
 
