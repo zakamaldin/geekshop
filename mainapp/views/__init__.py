@@ -12,6 +12,7 @@ from .products import (
     contacts,
     ProductListView,
     ProductCreateView,
-    product_detail,
-    product_edit,
+    ProductDetailView,
+    ProductUpdateView,
+    ProductDeleteView
 )

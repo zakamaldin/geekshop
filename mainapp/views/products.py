@@ -5,8 +5,9 @@ from django.shortcuts import (
     redirect
 )
 from django.views.generic import (
-    ListView, DetailView, CreateView
+    ListView, DetailView, CreateView, UpdateView, DeleteView
 )
+from django.views.generic.edit import FormMixin
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.conf import settings
@@ -51,7 +52,6 @@ class ProductListView(ListView):
 class ProductCreateView(CreateView):
     model = Product
     template_name = 'mainapp/product_detail.html'
-    context_object_name = 'form'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
 
@@ -59,44 +59,54 @@ class ProductCreateView(CreateView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['button'] = 'add'
+        context['button'] = 'Add'
         return context
 
 
-def product_detail(request, pk):
-    obj = get_object_or_404(Product, pk=pk)
-    form = ProductFormModel(instance=obj)
-    template = 'mainapp/product_detail.html'
-    content = {'form': form, 'button': 'edit'}
-    success_url = 'products:product_list'
-    if request.method == 'POST' and 'back' in request.POST:
-        return redirect(reverse_lazy(success_url))
+class ProductDetailView(FormMixin, DetailView):
+    model = Product
+    template_name = 'mainapp/product_detail.html'
+    form_class = ProductFormModel
 
-    if request.method == 'POST':
-        return redirect(reverse_lazy('products:product_edit', kwargs={'pk': pk}))
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['form'] = ProductFormModel(instance=self.object)
+        context['button'] = 'Edit'
+        context['type'] = 'detail'
 
-    return render(request, template, content)
+        return context
 
 
-def product_edit(request, pk):
-    obj = get_object_or_404(Product, pk=pk)
-    form = ProductFormModel(instance=obj)
-    template = 'mainapp/product_detail.html'
-    content = {'form': form, 'button': 'save', 'type': 'edit'}
-    success_url = 'products:product_list'
-    if request.method == 'POST' and 'back' in request.POST:
-        return redirect(reverse_lazy(success_url))
+class ProductUpdateView(UpdateView):
+    model = Product
+    template_name = 'mainapp/product_detail.html'
+    form_class = ProductFormModel
+    success_url = reverse_lazy('products:product_list')
 
-    if request.method == 'POST' and 'delete' in request.POST:
-        obj.delete()
-        return redirect(reverse_lazy(success_url))
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProductUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['form'] = ProductFormModel(instance=self.object)
+        context['button'] = 'Save'
+        context['type'] = 'edit'
+        return context
 
-    if request.method == 'POST':
-        form = ProductFormModel(request.POST, request.FILES, instance=obj)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse_lazy('products:product_detail', kwargs={'pk': pk}))
 
-    return render(request, template, content)
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'mainapp/product_detail.html'
+    form_class = ProductFormModel
+    success_url = reverse_lazy('products:product_list')
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProductDeleteView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['form'] = ProductFormModel(instance=self.object)
+        context['button'] = 'Yes, delete'
+        context['type'] = 'delete'
+        return context
 
