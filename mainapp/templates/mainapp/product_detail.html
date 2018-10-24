@@ -16,7 +16,10 @@
             {{ field }}
         </div>
     {% endfor %}
-        <input type="submit" name="back" value="back">
+        <a href="{% url 'products:product_list' %}">
+            <button type="button">Back</button>
+        </a>
+
         <input type="submit" value="{{ button }}">
         {% if type == 'edit' %}
         <input type="submit" name="delete" value="delete">

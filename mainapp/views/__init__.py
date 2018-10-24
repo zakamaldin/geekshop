@@ -11,7 +11,7 @@ from .products import (
     products,
     contacts,
     ProductListView,
+    ProductCreateView,
     product_detail,
     product_edit,
-    product_create,
 )

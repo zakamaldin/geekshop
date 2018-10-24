@@ -6,7 +6,10 @@
 {% block container %}
     <form action="" method="POST" >
         {% csrf_token %}
-        <input type="submit" value="add new">
+        <a href="{% url 'products:create' %}">
+            <button type="button">Add new</button>
+        </a>
+
         <ul class="paggination" style="display: block; position: static">
             {% if page_obj.has_previous %}
             <li class="paggination_control">
