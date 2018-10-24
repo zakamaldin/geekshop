@@ -38,17 +38,15 @@ def products(request):
 def contacts(request):
     return render(request, 'mainapp/contacts.html', {'contacts_filling': contacts_filling})
 
-# Lesson05 #
+# Lesson06 #
 
 
-def product_list(request):
-    query = get_list_or_404(Product)
-    paginator = Paginator(query, 3)
-    page = request.GET.get('page')
-    items = paginator.get_page(page)
-    if request.method == 'POST':
-        return redirect(reverse_lazy('products:create'))
-    return render(request, 'mainapp/product_list.html', {'results': items})
+class ProductListView(ListView):
+    model = Product
+    template_name = 'mainapp/product_list.html'
+    context_object_name = 'results'
+    paginate_by = 3
+
 
 
 def product_detail(request, pk):

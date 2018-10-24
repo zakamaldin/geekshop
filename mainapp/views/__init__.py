@@ -6,12 +6,11 @@ from .categories import (
 )
 
 from .products import (
-    product_list,
     main,
     product_info,
     products,
     contacts,
-    product_list,
+    ProductListView,
     product_detail,
     product_edit,
     product_create,
