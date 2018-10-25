@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    <title>Product Info</title>
+    <title>Category Info</title>
 {% endblock %}
 {% block container %}
     <form action="" method="POST" enctype="multipart/form-data">
@@ -15,10 +15,17 @@
             {{ field }}
         </div>
     {% endfor %}
-        <input type="submit" name="back" value="back">
-        <input type="submit" value="{{ button }}">
-        {% if type == 'edit' %}
-        <input type="submit" name="delete" value="delete">
+
+        <a href="{% url 'categories:category_list' %}" class="order-link button-link">Back</a>
+
+        {% if type == 'detail' %}
+        <a href="{% url 'categories:category_edit' pk=object.pk %}" class="order-link button-link">{{ button }}</a>
+        {% elif type == 'edit' %}
+        <button type="submit" class="order-link button-link save">{{ button }}</button>
+        <a href="{% url 'categories:category_delete' pk=object.pk %}" class="order-link button-link delete">Delete</a>
+        {% elif type == 'delete' %}
+        <button type="submit" class="order-link button-link delete">{{ button }}</button>
         {% endif %}
+
     </form>
 {% endblock %}

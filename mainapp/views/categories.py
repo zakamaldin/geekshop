@@ -4,68 +4,82 @@ from django.shortcuts import (
     get_object_or_404,
     redirect
 )
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
+from django.views.generic.edit import FormMixin
 from django.urls import reverse_lazy
 from mainapp.forms import ProductCategoryFormModel
 from mainapp.models import ProductCategory
 
 
-def category_list(request):
-    query = get_list_or_404(ProductCategory)
-    if request.method == 'POST':
-        return redirect(reverse_lazy('categories:category_create'))
-    return render(request, 'mainapp/category_list.html', {'results': query})
+class ProductCategoryListView(ListView):
+    model = ProductCategory
+    template_name = 'mainapp/category_list.html'
+    context_object_name = 'results'
+    paginate_by = 3
 
 
-def category_detail(request, pk):
-    obj = get_object_or_404(ProductCategory, pk=pk)
-    form = ProductCategoryFormModel(instance=obj)
-    template = 'mainapp/category_detail.html'
-    content = {'form': form, 'button': 'edit'}
-    success_url = 'categories:category_list'
-    if request.method == 'POST' and 'back' in request.POST:
-        return redirect(reverse_lazy(success_url))
+class ProductCategoryCreateView(CreateView):
+    model = ProductCategory
+    template_name = 'mainapp/category_detail.html'
+    form_class = ProductCategoryFormModel
+    success_url = reverse_lazy('categories:category_list')
 
-    if request.method == 'POST':
-        return redirect(reverse_lazy('categories:category_edit', kwargs={'pk': pk}))
-
-    return render(request, template, content)
-
-
-def category_create(request):
-    form = ProductCategoryFormModel()
-    template = 'mainapp/category_detail.html'
-    content = {'form': form, 'button': 'add'}
-    success_url = 'categories:category_list'
-    if request.method == 'POST' and 'back' in request.POST:
-        return redirect(reverse_lazy(success_url))
-
-    if request.method == 'POST':
-        form = ProductCategoryFormModel(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse_lazy(success_url))
-
-    return render(request, template, content)
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['button'] = 'Add'
+        return context
 
 
-def category_edit(request, pk):
-    obj = get_object_or_404(ProductCategory, pk=pk)
-    form = ProductCategoryFormModel(instance=obj)
-    template = 'mainapp/category_detail.html'
-    content = {'form': form, 'button': 'save', 'type': 'edit'}
-    success_url = 'categories:category_list'
-    if request.method == 'POST' and 'back' in request.POST:
-        return redirect(reverse_lazy(success_url))
+class ProductCategoryDetailView(FormMixin, DetailView):
+    model = ProductCategory
+    template_name = 'mainapp/category_detail.html'
+    form_class = ProductCategoryFormModel
 
-    if request.method == 'POST' and 'delete' in request.POST:
-        obj.delete()
-        return redirect(reverse_lazy(success_url))
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProductCategoryDetailView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['form'] = ProductCategoryFormModel(instance=self.object)
+        context['button'] = 'Edit'
+        context['type'] = 'detail'
 
-    if request.method == 'POST':
-        form = ProductCategoryFormModel(request.POST, instance=obj)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse_lazy('categories:category_detail', kwargs={'pk': pk}))
+        return context
 
-    return render(request, template, content)
+
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    template_name = 'mainapp/category_detail.html'
+    form_class = ProductCategoryFormModel
+    success_url = reverse_lazy('categories:category_list')
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProductCategoryUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['form'] = ProductCategoryFormModel(instance=self.object)
+        context['button'] = 'Save'
+        context['type'] = 'edit'
+        return context
+
+
+class ProductCategoryDeleteView(DeleteView):
+    model = ProductCategory
+    template_name = 'mainapp/category_detail.html'
+    form_class = ProductCategoryFormModel
+    success_url = reverse_lazy('categories:category_list')
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProductCategoryDeleteView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['form'] = ProductCategoryFormModel(instance=self.object)
+        context['button'] = 'Yes, delete'
+        context['type'] = 'delete'
+        return context
+
+
 

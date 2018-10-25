@@ -1,8 +1,9 @@
 from .categories import (
-    category_list,
-    category_detail,
-    category_edit,
-    category_create
+    ProductCategoryListView,
+    ProductCategoryCreateView,
+    ProductCategoryDetailView,
+    ProductCategoryUpdateView,
+    ProductCategoryDeleteView,
 )
 
 from .products import (
