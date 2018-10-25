@@ -8,7 +8,6 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
 from django.views.generic.edit import FormMixin
-from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.conf import settings
 import json
