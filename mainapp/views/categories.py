@@ -31,6 +31,7 @@ class ProductCategoryCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['button'] = 'Add'
+        context['type'] = 'create'
         return context
 
 

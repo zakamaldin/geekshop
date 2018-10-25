@@ -19,8 +19,11 @@
 
         <a href="{% url 'products:product_list' %}" class="order-link button-link">Back</a>
 
-        {% if type == 'detail' %}
+        {% if type == 'create' %}
+        <button type="submit" class="order-link button-link">{{ button }}</button>
+        {% elif type == 'detail' %}
         <a href="{% url 'products:product_edit' pk=object.pk %}" class="order-link button-link">{{ button }}</a>
+
         {% elif type == 'edit' %}
         <button type="submit" class="order-link button-link save">{{ button }}</button>
         <a href="{% url 'products:product_delete' pk=object.pk %}" class="order-link button-link delete">Delete</a>
