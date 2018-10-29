@@ -12,7 +12,7 @@ def rest_product_list(request):
         lambda itm: {
             'category': itm.category.name,
             'name': itm.name,
-            #'image': itm.image,
+            'image': itm.image.url,
             'short_desc': itm.short_desc,
             'description': itm.description,
             'price': itm.price,
