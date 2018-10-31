@@ -67,7 +67,41 @@ class ProductAdmin(admin.ModelAdmin):
         return obj.created >= (now() - timedelta(days=5))
 
 
-admin.site.register(ProductCategory)
+@admin.register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'description',
+        'is_new',
+        'created',
+        'modified',
+    ]
+
+    list_filter = [
+        'description'
+    ]
+
+    search_fields = [
+        'description'
+
+    ]
+
+    fieldsets = [
+        (
+            None, {
+                'fields': (
+                    'name',
+                    'description'
+                )
+            }
+        )
+
+    ]
+
+    def is_new(self, obj):
+        return obj.created >= (now() - timedelta(days=5))
+
+
 admin.site.register(ShopUser)
 
 
