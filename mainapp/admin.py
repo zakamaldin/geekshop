@@ -66,6 +66,8 @@ class ProductAdmin(admin.ModelAdmin):
     def is_new(self, obj):
         return obj.created >= (now() - timedelta(days=5))
 
+    is_new.boolean = True
+
 
 @admin.register(ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
@@ -100,6 +102,8 @@ class ProductCategoryAdmin(admin.ModelAdmin):
 
     def is_new(self, obj):
         return obj.created >= (now() - timedelta(days=5))
+
+    is_new.boolean = True
 
 
 admin.site.register(ShopUser)
