@@ -11,6 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
         'picture',
         'name',
         'is_new',
+        'is_active',
         'category',
         'short_desc',
         'quantity',
@@ -75,6 +76,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
         'name',
         'description',
         'is_new',
+        'is_active',
         'created',
         'modified',
     ]

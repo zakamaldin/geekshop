@@ -6,6 +6,8 @@ class ProductCategory(models.Model):
     description = models.TextField(verbose_name='описание', blank=True)
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
 
     def __str__(self):
         return self.name
@@ -21,6 +23,7 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='склад', default=0)
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return "{} ({})".format(self.name, self.category.name)
