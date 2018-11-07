@@ -1,16 +1,51 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    <title>{{ title }}</title>
+    <title>Categories</title>
 {% endblock %}
 {% block container %}
     <form action="" method="POST">
         {% csrf_token %}
         <div class="container" >
-        <input type="submit" value="add new">
+            <a href="{% url 'categories:category_create' %}" class="order-link button-link">New</a>
+            <ul class="paggination" style="display: block; position: static">
+            {% if page_obj.has_previous %}
+            <li class="paggination_control">
+                <a
+                        href="?page={{ page_obj.previous_page_number }}"
+                        class="paggination_link"
+                >
+                    Previous
+                </a>
+            </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                <li class="paggination_control">
+                    <a
+                            href="?page={{ num }}"
+                            class="paggination_link"
+                    >
+                        {{ num }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="paggination_control">
+                <a
+                        href="?page={{ page_obj.next_page_number }}"
+                        class="paggination_link"
+                >
+                    Next
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+
+
         {% for itm in results %}
         <div>
-            <a href="{% url 'mainapp:category_detail' pk=itm.pk %}" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
+            <a href="{% url 'categories:category_detail' pk=itm.pk %}" class="order-link small-order-link"><img src="/static/img/arrow.svg" alt="arrow"></a>
             <h3>{{ itm.category.name }}</h3>
             <h4>{{ itm.name }}</h4>
             <p>{{ itm.description }}</p>

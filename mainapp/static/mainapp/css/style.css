@@ -350,6 +350,19 @@ a {
     opacity: 1;
 }
 
+.button-link{
+    width: 150px;
+    padding-left: unset;
+    padding-right: unset;
+    margin-bottom: 10px;
+}
+.delete:hover {
+    background-color: #b86260;
+}
+.save:hover {
+    background-color: #47b870;
+}
+
 .promo {
     display: flex;
     height: 683px;

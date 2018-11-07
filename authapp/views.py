@@ -2,11 +2,14 @@ from django.shortcuts import render, HttpResponseRedirect
 from authapp.forms import (
     ShopUserLoginForm,
     ShopUserRegisterForm,
-    ShopUser
     )
+from authapp.models import ShopUser
 from django.contrib import auth
-from django.urls import reverse
-
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
+from django.views.generic.edit import FormMixin
 
 def login(request):
     title = 'Enter'
@@ -46,19 +49,21 @@ def edit(request):
     return render(request, template, content)
 
 
-def register(request):
-    title = 'Registration'
-    template = 'authapp/user.html'
-    if request.method == 'POST':
-        form = ShopUserRegisterForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('auth:login'))
-    else:
-        form = ShopUserRegisterForm()
-    content = {'title': title, 'form': form, 'type': 'register', 'text': 'Log In', 'button': 'Log In'}
-    return render(request, template, content)
+class RegisterView(CreateView):
+    model = ShopUser
+    template_name = 'authapp/user.html'
+    form_class = ShopUserRegisterForm
+    success_url = reverse_lazy('auth:login')
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['title'] = 'Registration'
+        context['type'] = 'register'
+        context['text'] = 'Log In'
+        context['button'] = 'Log In'
+        return context
 
 
 

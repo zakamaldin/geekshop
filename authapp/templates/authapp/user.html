@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="content padding-site">
-            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% for field in form  %}
                 <div class="form-field">
@@ -23,7 +23,7 @@
                 <br>
                 <div class="buttons">
                 {% if type != 'edit' %}
-                <input type="submit" class="form-control order-link" value="{{ button }}">
+                    <button type="submit" class="form-control order-link">{{ button }}</button>
                 {% else %}
                     <input type="submit" name="edit" class="form-control order-link" value="{{ button }}">
                     <input type="submit" name="delete" class="form-control order-link delete" value="Delete">
