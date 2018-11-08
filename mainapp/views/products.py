@@ -11,6 +11,8 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from authapp.mixins import AdminGroupRequired
+
 import json
 import os
 from mainapp.forms import ProductFormModel
@@ -49,12 +51,13 @@ class ProductListView(ListView):
     paginate_by = 3
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, AdminGroupRequired, CreateView):
     model = Product
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
     login_url = reverse_lazy('auth:login')
+    redirect_url = reverse_lazy('products:product_list')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -81,12 +84,13 @@ class ProductDetailView(FormMixin, DetailView):
         return context
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, AdminGroupRequired, UpdateView):
     model = Product
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
     login_url = reverse_lazy('auth:login')
+    redirect_url = reverse_lazy('products:product_list')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -98,11 +102,12 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, AdminGroupRequired, DeleteView):
     queryset = Product.objects.filter(is_active=True)
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
+    redirect_url = reverse_lazy('products:product_list')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
