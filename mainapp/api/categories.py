@@ -3,6 +3,14 @@ from django.http import JsonResponse
 from django.views.generic import ListView
 from django.urls import reverse
 
+from rest_framework.viewsets import ModelViewSet
+from mainapp.serializer import ProductCategorySerializer
+
+
+class ProductCategoryViewSet(ModelViewSet):
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
+
 
 class CategoryList(ListView):
     model = ProductCategory
