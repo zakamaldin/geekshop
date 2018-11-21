@@ -10,6 +10,8 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
 from django.views.generic.edit import FormMixin
+from django.core.mail import send_mail
+
 
 def login(request):
     title = 'Enter'
@@ -64,6 +66,31 @@ class RegisterView(CreateView):
         context['text'] = 'Log In'
         context['button'] = 'Log In'
         return context
+
+
+
+def account_signin(request):
+    success_url = reverse_lazy('main:index')
+    form = ShopUserRegisterForm()
+
+    if request.method == 'POST':
+        form = ShopUserRegisterForm(data=request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            send_mail(
+                'Signin User',
+                f'Test Message.',
+                from_email='info@project.ru',
+                recipient_list=[email],
+            )
+
+    return render(request, 'authapp/user.html', {'form': form,
+                                                 'title': 'Registration',
+                                                 'type': 'register',
+                                                 'text': 'Log In',
+                                                 'button': 'Log In'
+                                                 }
+                  )
 
 
 

@@ -2,6 +2,10 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from authapp.models import ShopUser
+import random, hashlib
+from django.urls import reverse
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 class ShopUserLoginForm(AuthenticationForm):
