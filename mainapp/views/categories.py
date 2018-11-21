@@ -1,9 +1,6 @@
-from django.shortcuts import (
-    render,
-    get_list_or_404,
-    get_object_or_404,
-    redirect
-)
+from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
@@ -14,17 +11,18 @@ from mainapp.models import ProductCategory
 
 
 class ProductCategoryListView(ListView):
-    model = ProductCategory
+    queryset = ProductCategory.objects.filter(is_active=True)
     template_name = 'mainapp/category_list.html'
     context_object_name = 'results'
     paginate_by = 3
 
 
-class ProductCategoryCreateView(CreateView):
+class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
     model = ProductCategory
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
     success_url = reverse_lazy('categories:category_list')
+    login_url = reverse_lazy('auth:login')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -36,7 +34,7 @@ class ProductCategoryCreateView(CreateView):
 
 
 class ProductCategoryDetailView(FormMixin, DetailView):
-    model = ProductCategory
+    queryset = ProductCategory.objects.filter(is_active=True)
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
 
@@ -51,11 +49,12 @@ class ProductCategoryDetailView(FormMixin, DetailView):
         return context
 
 
-class ProductCategoryUpdateView(UpdateView):
+class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = ProductCategory
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
     success_url = reverse_lazy('categories:category_list')
+    login_url = reverse_lazy('auth:login')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -68,7 +67,7 @@ class ProductCategoryUpdateView(UpdateView):
 
 
 class ProductCategoryDeleteView(DeleteView):
-    model = ProductCategory
+    queryset = ProductCategory.objects.filter(is_active=True)
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
     success_url = reverse_lazy('categories:category_list')
@@ -82,5 +81,9 @@ class ProductCategoryDeleteView(DeleteView):
         context['type'] = 'delete'
         return context
 
-
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 

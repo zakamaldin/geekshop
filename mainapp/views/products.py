@@ -1,15 +1,16 @@
 from django.shortcuts import (
     render,
-    get_list_or_404,
-    get_object_or_404,
-    redirect
 )
+from django.http import HttpResponseRedirect
+
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
 from django.views.generic.edit import FormMixin
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 import json
 import os
 from mainapp.forms import ProductFormModel
@@ -42,17 +43,18 @@ def contacts(request):
 
 
 class ProductListView(ListView):
-    model = Product
+    queryset = Product.objects.filter(is_active=True)
     template_name = 'mainapp/product_list.html'
     context_object_name = 'results'
     paginate_by = 3
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
+    login_url = reverse_lazy('auth:login')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -64,7 +66,7 @@ class ProductCreateView(CreateView):
 
 
 class ProductDetailView(FormMixin, DetailView):
-    model = Product
+    queryset = Product.objects.filter(is_active=True)
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
 
@@ -79,11 +81,12 @@ class ProductDetailView(FormMixin, DetailView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
+    login_url = reverse_lazy('auth:login')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -96,7 +99,7 @@ class ProductUpdateView(UpdateView):
 
 
 class ProductDeleteView(DeleteView):
-    model = Product
+    queryset = Product.objects.filter(is_active=True)
     template_name = 'mainapp/product_detail.html'
     form_class = ProductFormModel
     success_url = reverse_lazy('products:product_list')
@@ -109,4 +112,12 @@ class ProductDeleteView(DeleteView):
         context['button'] = 'Yes, delete'
         context['type'] = 'delete'
         return context
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
 
