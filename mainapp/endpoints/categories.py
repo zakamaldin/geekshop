@@ -1,13 +1,11 @@
 from django.urls import path
-from mainapp.api import (
-    rest_category_list
-)
+from mainapp.api import CategoryList
 
 app_name = 'rest_categories'
 
 urlpatterns = [
 
-    path('', rest_category_list, name='rest_list'),
+    path('', CategoryList.as_view(), name='rest_list'),
 
 ]
 

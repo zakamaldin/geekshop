@@ -4,6 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
+from authapp.mixins import AdminGroupRequired
+
 from django.views.generic.edit import FormMixin
 from django.urls import reverse_lazy
 from mainapp.forms import ProductCategoryFormModel
@@ -17,12 +19,13 @@ class ProductCategoryListView(ListView):
     paginate_by = 3
 
 
-class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
+class ProductCategoryCreateView(LoginRequiredMixin, AdminGroupRequired, CreateView):
     model = ProductCategory
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
     success_url = reverse_lazy('categories:category_list')
     login_url = reverse_lazy('auth:login')
+    redirect_url = reverse_lazy('categories:category_list')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -49,12 +52,13 @@ class ProductCategoryDetailView(FormMixin, DetailView):
         return context
 
 
-class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
+class ProductCategoryUpdateView(LoginRequiredMixin, AdminGroupRequired, UpdateView):
     model = ProductCategory
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
     success_url = reverse_lazy('categories:category_list')
     login_url = reverse_lazy('auth:login')
+    redirect_url = reverse_lazy('categories:category_list')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -66,11 +70,12 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class ProductCategoryDeleteView(DeleteView):
+class ProductCategoryDeleteView(LoginRequiredMixin, AdminGroupRequired, DeleteView):
     queryset = ProductCategory.objects.filter(is_active=True)
     template_name = 'mainapp/category_detail.html'
     form_class = ProductCategoryFormModel
     success_url = reverse_lazy('categories:category_list')
+    redirect_url = reverse_lazy('categories:category_list')
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context

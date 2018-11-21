@@ -1,6 +1,5 @@
 from django.contrib import admin
 from mainapp.models import ProductCategory, Product
-from authapp.models import ShopUser
 from django.utils.timezone import now, timedelta
 from django.template.loader import render_to_string
 # Register your models here.
@@ -108,6 +107,5 @@ class ProductCategoryAdmin(admin.ModelAdmin):
     is_new.boolean = True
 
 
-admin.site.register(ShopUser)
 
 
