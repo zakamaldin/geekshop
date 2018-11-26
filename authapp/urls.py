@@ -10,6 +10,7 @@ urlpatterns = [
     path('edit/', authapp.edit, name='edit'),
     # path('register/', RegisterView.as_view(), name='register'),
     path('register/', authapp.account_signin, name='register'),
+    path('verify/<str:email>/<str:activation_key>/', authapp.verify, name='verify'),
 
 
 ]

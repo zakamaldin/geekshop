@@ -138,7 +138,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'authapp.ShopUser'
 
-
+DOMAIN_NAME = 'http://localhost:8000'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = None
