@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
+import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,13 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+GOOGLE = json.load(open(os.path.join(BASE_DIR, 'geekshop', 'secret.json'), 'r'))
+
 
 # Application definition
 INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'rest_framework',
-
+    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -93,6 +95,13 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+)
+SOCIAL_AUTH_URL_NAMESPACE = 'auth:social'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE["KEY"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE["SECRET"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
