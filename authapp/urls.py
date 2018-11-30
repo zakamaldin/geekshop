@@ -12,7 +12,6 @@ urlpatterns = [
     # path('register/', RegisterView.as_view(), name='register'),
     path('register/', authapp.account_signin, name='register'),
     path('verify/<str:email>/<str:activation_key>/', authapp.verify, name='verify'),
-    path('oauth2/', include('social_django.urls', namespace='social')),
 
 
 

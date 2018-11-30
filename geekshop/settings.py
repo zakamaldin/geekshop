@@ -99,7 +99,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
 )
-SOCIAL_AUTH_URL_NAMESPACE = 'auth:social'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE["KEY"]
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE["SECRET"]
 
