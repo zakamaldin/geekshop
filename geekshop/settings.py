@@ -34,6 +34,7 @@ GOOGLE = json.load(open(os.path.join(BASE_DIR, 'geekshop', 'secret.json'), 'r'))
 INSTALLED_APPS = [
     'mainapp',
     'authapp',
+    'cart',
     'rest_framework',
     'social_django',
     'django.contrib.admin',
