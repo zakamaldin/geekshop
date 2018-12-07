@@ -7,6 +7,7 @@
 {% block container %}
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    {{ formset.management_form }}
     {% for field in form  %}
         <div class="field">
             <label for="{{ field.name }}" class="form-field-label">
