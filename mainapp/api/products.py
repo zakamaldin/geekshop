@@ -80,7 +80,7 @@ def product_json_list(request):
             map(
                 lambda itm: {
                     'id': itm.id,
-                    'title': itm.title
+                    'title': itm.name
                 },
                 query
             )
