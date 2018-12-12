@@ -17,15 +17,17 @@
     <ul id="menu_categories"></ul>
     {% block container %}
     {% endblock %}
-    <script type="text/javascript" src="{% static 'mainapp/js/menu.js' %}"></script>
-    <script>
-        axios.get('http://127.0.0.1:8000/api/categories/')
-            .then(renderCategoryData)
-    </script>
-    <script>
-        axios.get('http://127.0.0.1:8000/api/products/')
-            .then(renderProductData)
-    </script>
+    {% block page_js %}
+    {% endblock %}
+{#    <script type="text/javascript" src="{% static 'mainapp/js/menu.js' %}"></script>#}
+{#    <script>#}
+{#        axios.get('http://127.0.0.1:8000/api/categories/')#}
+{#            .then(renderCategoryData)#}
+{#    </script>#}
+{#    <script>#}
+{#        axios.get('http://127.0.0.1:8000/api/products/')#}
+{#            .then(renderProductData)#}
+{#    </script>#}
 </body>
 
 </html>

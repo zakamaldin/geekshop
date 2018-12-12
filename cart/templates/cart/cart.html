@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
-{% block paje_js %}
+
+{% load static %}
+
+{% block title %}
+<title>Cart</title>
+{% endblock %}
+
+{% block container %}
+    {% csrf_token %}
+    <div class="product-list" style="margin-top: 50px"></div>
+{% endblock %}
+{% block page_js %}
     <script src="{% static 'mainapp/js/counter.js' %}"></script>
     <script src="{% static 'cart/js/items.js' %}"></script>
 
@@ -7,7 +18,7 @@
         const productList = document.querySelector('.product-list');
         const items = getLocalValue('products');
         const identityList = Object.keys(items);
-        const productsUrl = `{% url 'rest_products:rest_list' %}?id__in=${identityList.join()}`;
+        const productsUrl = `{% url 'rest_products:new_rest_list' %}?id__in=${identityList.join(',')}`;
 
         fetch(productsUrl)
             .then(response => response.json())
