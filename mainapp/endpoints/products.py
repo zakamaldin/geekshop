@@ -5,8 +5,8 @@ app_name = 'rest_products'
 
 urlpatterns = [
 
-    path('', ProductList.as_view(), name='rest_list'),
-    path('new_api/', product_json_list, name='new_rest_list'),
+    # path('', ProductList.as_view(), name='rest_list'),
+    path('', product_json_list, name='new_rest_list'),
 
 ]
 

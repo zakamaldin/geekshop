@@ -23,8 +23,8 @@
         fetch(productsUrl)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                data.results.map(
+                console.log(data)
+                data.map(
                     itm => productList.innerHTML += renderItem(itm, items[itm.id])
                 )
             })
