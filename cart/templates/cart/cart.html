@@ -18,7 +18,7 @@
         {#const productList = document.querySelector('.product-list');#}
         const items = getLocalValue('products');
         const identityList = Object.keys(items);
-        const productsUrl = `{% url 'rest_products:new_rest_list' %}?id__in=${identityList.join(',')}`;
+        const productsUrl = `{% url 'rest_products:rest_list' %}?id__in=${identityList.join(',')}`;
 
         $.ajax(
             {
@@ -26,7 +26,7 @@
             }
         ).done(
             response => {
-                response.map(
+                response.results.map(
                     itm => $('.product-list').append(renderItem(itm, items[itm.id]))
                 )
             }
