@@ -25,7 +25,7 @@ SECRET_KEY = 'q!(k=u)9b3^ptppgi71+ry6i*9=k-=7@7$-fk9=nol4s+xy%te'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'server']
 
 GOOGLE = json.load(open(os.path.join(BASE_DIR, 'geekshop', 'secret.json'), 'r'))
 
@@ -91,6 +91,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'postgres',
+    #     'USER': 'postgres',
+    #     'HOST': 'database',
+    #     'PORT': 5432
+    # }
 }
 
 
@@ -138,7 +145,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -149,7 +156,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'authapp.ShopUser'
 
 DOMAIN_NAME = 'http://localhost:8000'
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'smtp'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = None
 EMAIL_HOST_PASSWORD = None
