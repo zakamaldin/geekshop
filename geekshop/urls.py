@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from mainapp import views as mainapp_views
 from rest_framework.routers import DefaultRouter
 from mainapp.api.products import ProductViewSet
 from mainapp.api.categories import ProductCategoryViewSet
+
 
 router = DefaultRouter()
 router.register('products', ProductViewSet)
@@ -44,9 +46,9 @@ urlpatterns = [
     path('oauth2/', include('social_django.urls', namespace='social')),
     path('cart/', include('cart.urls', namespace='cart')),
 
-
 ]
 
 if settings.DEBUG:
+    import debug_toolbar
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+    urlpatterns += [re_path(r'^__debug__/', include(debug_toolbar.urls))]
