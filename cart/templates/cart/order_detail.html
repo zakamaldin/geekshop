@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>Product Info</title>
+{% endblock %}
+{% block container %}
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {% for field in form  %}
+        <div class="field">
+            <label for="{{ field.name }}" class="form-field-label">
+                {{ field.label }}
+            </label>
+            {{ field }}
+        </div>
+    {% endfor %}
+
+         <div style="display: block">
+        {% for form in formset %}
+            <div style="margin-top: 50px; margin-left: 50px" >
+                {% for field in form %}
+                    <div>
+                        <label for="{{ form.name }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% endfor %}
+
+        </div>
+        <a href="{% url 'cart:order_list' %}" class="order-link button-link">Back</a>
+
+        {% if type == 'create' %}
+        <button type="submit" class="order-link button-link">{{ button }}</button>
+        {% elif type == 'detail' %}
+{#        <a href="{% url 'products:product_edit' pk=object.pk %}" class="order-link button-link">{{ button }}</a>#}
+
+        {% elif type == 'edit' %}
+        <button type="submit" class="order-link button-link save">{{ button }}</button>
+{#        <a href="{% url 'products:product_delete' pk=object.pk %}" class="order-link button-link delete">Delete</a>#}
+        {% elif type == 'delete' %}
+        <button type="submit" class="order-link button-link delete">{{ button }}</button>
+        {% endif %}
+
+    </form>
+{% endblock %}
