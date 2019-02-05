@@ -59,7 +59,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3
+    # 'PAGE_SIZE': 3
 }
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -67,7 +67,7 @@ ROOT_URLCONF = 'geekshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'geekshop', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

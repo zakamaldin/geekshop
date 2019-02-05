@@ -1,2 +1,2 @@
 from .categories import CategoryList
-from .products import ProductList
+from .products import ProductList, ProductViewSet

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views.generic import (
-    ListView, CreateView, DeleteView, UpdateView
+    ListView, CreateView, DeleteView, UpdateView, DetailView
 )
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
@@ -88,4 +88,9 @@ class OrderCreateView(CreateView):
                 return redirect(self.success_url)
 
         return render(self.request, self.template_name)
+
+
+def cart_view(request):
+    return render(request, 'cart/cart.html')
+
 

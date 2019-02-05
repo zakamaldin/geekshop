@@ -5,11 +5,27 @@ from django.urls import reverse
 
 from rest_framework.viewsets import ModelViewSet
 from mainapp.serializer import ProductSerializer
+from django.shortcuts import get_list_or_404
+from functools import reduce
+from django.db.models import Q
 
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        query_params = (
+            (key, list(map(int, value.split(','))) if key.endswith('_in') else value)
+            for key, value in self.request.GET.items()
+        )
+        return Product.objects.filter(
+            reduce(
+                lambda store, itm: store | Q(**{itm[0]: itm[1]}),
+                query_params,
+                Q()
+            )
+        )
 
 
 class ProductList(ListView):
@@ -56,3 +72,4 @@ class ProductList(ListView):
 
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context)
+
