@@ -95,13 +95,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.google.GoogleOAuth2',
-)
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE["KEY"]
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE["SECRET"]
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
