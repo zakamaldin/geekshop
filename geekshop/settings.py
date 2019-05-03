@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'authapp',
     'cart',
     'rest_framework',
-    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
